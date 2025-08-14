@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 
 
 def about(request):
-    return HttpResponse("This is about page")
+    return render(request, "app_1/about.html")
 
 def contact(request):
-    return HttpResponse("This is contact page")
+    return render(request, "app_1/contact.html")
