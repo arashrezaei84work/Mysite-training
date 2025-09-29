@@ -15,3 +15,6 @@ def contact(request):
 
 def test_view(request):
     return render(request, "app_1/test.html")
+
+def elements(request):
+    return render(request, "app_1/elements.html")
