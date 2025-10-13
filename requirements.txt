@@ -5,3 +5,4 @@ Django   3.2.25
 pip      24.2
 pytz     2025.2
 sqlparse 0.5.3
+pillow   11.3.0
