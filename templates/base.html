@@ -70,26 +70,7 @@
             <ul class="nav-menu">
               <li><a href="{% url 'app_1:index' %}">Home</a></li>
               <li><a href="{% url 'app_1:about' %}">About</a></li>
-              <li class="menu-has-children">
-                <a href="">Blog</a>
-                <ul>
-                  <li><a href="{% url 'blog:index' %}">Blog Home</a></li>
-                  <li><a href="{% url 'blog:detail' %}">Blog Single</a></li>
-                </ul>
-              </li>
-              <li class="menu-has-children">
-                <a href="">Pages</a>
-                <ul>
-                  <li><a href="{% url 'app_1:elements' %}">Elements</a></li>
-                  <li class="menu-has-children">
-                    <a href="">Level 2 </a>
-                    <ul>
-                      <li><a href="#">Item One</a></li>
-                      <li><a href="#">Item Two</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
+              <li><a href="{% url 'blog:index' %}">Blog</a></li>
               <li><a href="{% url 'app_1:contact' %}">Contact</a></li>
             </ul>
           </nav>
