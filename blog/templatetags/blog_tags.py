@@ -1,5 +1,5 @@
 from django import template
-from blog.models import Post
+from blog.models import Post, Category
 register = template.Library()
 
 @register.simple_tag(name="totalpost")
@@ -18,6 +18,15 @@ def snippts(value, arg=25):
     return value[:arg] + "..."
 
 @register.inclusion_tag("blog/blog-popular-post.html")
-def latestpost():
-    posts = Post.objects.filter(status=1).order_by('published_date')
+def latestpost(arg=3):
+    posts = Post.objects.filter(status=1).order_by('published_date')[:arg]
     return {"posts" : posts}
+
+@register.inclusion_tag("blog/blog-category.html")
+def postcategories():
+    post = Post.objects.filter(status=1)
+    categories = Category.objects.all()
+    cat_dict = {}
+    for name in categories:
+        cat_dict[name] = post.filter(category=name).count
+    return {'categories' : cat_dict}
