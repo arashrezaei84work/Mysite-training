@@ -96,7 +96,7 @@
 										 {% endcomment %}
 
 										 {% for cat in post.category.all %}
-										 	<a href="" style="color:black;">{{ cat.name }}</a> {% if not forloop.last %},{% endif %}
+										 	<a href="{% url 'blog:category' cat=cat.name %}" style="color:black;">{{ cat.name }}</a> {% if not forloop.last %},{% endif %}
 										 {% endfor %}
 									</ul>
 									<div class="user-details row">
