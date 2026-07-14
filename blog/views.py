@@ -4,8 +4,12 @@ from blog.models import Post
 from django.template import loader
 # Create your views here.
 
-def blog_view(request):
+def blog_view(request, **kwargs):
     posts = Post.objects.filter(status=1)
+    if kwargs.get('cat') != None:
+        posts = posts.filter(category__name=kwargs['cat'])
+    if kwargs.get('author_name') != None:
+        posts = posts.filter(author__username=kwargs['author_name'])
     context = {
         'posts' : posts
     }
