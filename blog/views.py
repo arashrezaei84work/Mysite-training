@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from blog.models import Post
 from django.template import loader
+from django.core.paginator import Paginator , PageNotAnInteger, EmptyPage
+
 # Create your views here.
 
 def blog_view(request, **kwargs):
@@ -10,6 +12,15 @@ def blog_view(request, **kwargs):
         posts = posts.filter(category__name=kwargs['cat'])
     if kwargs.get('author_name') != None:
         posts = posts.filter(author__username=kwargs['author_name'])
+   
+    posts = Paginator(posts, 1)
+    try:
+        page_number = request.GET.get('page')
+        posts = posts.get_page(page_number)
+    except PageNotAnInteger:
+        posts = posts.get_page(1)
+    except EmptyPage:
+        posts = posts.get_page(1)
     context = {
         'posts' : posts
     }
@@ -24,7 +35,6 @@ def blog_detail(request, pid):
     current_index = posts.index(post)
     perv_post = posts[current_index - 1] if current_index > 0 else  None
     next_post = posts[current_index + 1] if current_index < len(posts) - 1 else None
-
     context = {
         'post' :  post,
         'perv_post' : perv_post,
