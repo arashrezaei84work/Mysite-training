@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
-	{% block content %}
+{% load blog_tags %}
+{% block content %}
 	
 				<!-- start banner Area -->
 			<section class="banner-area relative">
@@ -175,8 +176,10 @@
 			<!-- End home-about Area -->
 			
 	
-			<!-- Start blog Area -->
-			<section class="recent-blog-area section-gap">
+			<!-- Start blog Area-->
+			 {% recentPost %} 
+			
+			<!--<section class="recent-blog-area section-gap">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-9">
@@ -324,7 +327,8 @@
 						</div>
 					</div>
 				</div>	
-			</section>
+			</section>-->
+
 			<!-- End recent-blog Area -->			
 
 	
