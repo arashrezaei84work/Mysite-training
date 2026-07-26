@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from blog.models import Post
 from django.template import loader
 from django.core.paginator import Paginator , PageNotAnInteger, EmptyPage
+from app_1.forms import ContactForm
 
 # Create your views here.
 
@@ -61,13 +62,14 @@ def blog_search(request):
     return render(request, "blog/blog-home.html", context)
 
 
-def test(request):
-    # post = Post.objects.get(id=id)
-    # post = get_object_or_404(Post, pk=id)
-    # post = Post.objects.all().values()
-    # temp = loader.get_template("test.html")
-    # context = {
-    #     'post' :  post
-    # }
-    return render(request, "test.html") 
-    # return HttpResponse(temp.render(context, request))
+# def test(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponse('OK')
+#         else:
+#             return HttpResponse('failed')
+
+#     form = ContactForm()
+#     return render(request, "test.html",{'form' : form}) 

@@ -9,5 +9,5 @@ urlpatterns = [
     path("author/<str:author_name>", blog_view, name="author"), 
     path("<int:pid>", blog_detail, name="detail"), # single
     path('search/',blog_search,name='search'),
-    path("test/", test, name="test"),
+    # path("test/", test, name="test"),
 ]

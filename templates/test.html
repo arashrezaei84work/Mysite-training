@@ -8,6 +8,10 @@
 </head>
 <body>
     <h1>Test page</h1>
-    {% popularpost %}
+    <form action="{% url 'blog:test' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">submit</button>
+</form>
 </body>
 </html>
