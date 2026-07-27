@@ -15,6 +15,7 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            form.instance.name = "unknown"
             messages.add_message(request,messages.SUCCESS,'your ticket submited')
             form.save()
         else:
