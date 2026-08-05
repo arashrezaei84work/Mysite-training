@@ -4,6 +4,7 @@ asgiref           3.9.1
 Django            3.2.25
 django-extensions 3.2.3
 django-robots     6.1
+django-taggit     3.1.0
 pillow            11.3.0
 pip               25.2
 pytz              2025.2
