@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.sites',
     'django_extensions',
+    'django_summernote',
     'taggit',
     'app_1.apps.App1Config',
     'blog.apps.BlogConfig',
@@ -52,6 +53,9 @@ SITE_ID = 2
 # robots
 ROBOTS_USE_SITEMAP = True
 ROBOTS_USE_HOST = True
+
+# summernotes config
+SUMMERNOTE_THEME = 'bs4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
