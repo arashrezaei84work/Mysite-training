@@ -28,6 +28,7 @@ sitemaps = {
 }
 
 urlpatterns = [
+    # path('admin/', include('multi_captcha_admin.urls')), 
     path('admin/', admin.site.urls),
     path("", include("app_1.urls")),
     path("blog/", include("blog.urls")),
