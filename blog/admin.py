@@ -17,7 +17,7 @@ class PostAdmin(SummernoteModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
-    list_display = ('name', 'subject' , 'email',  'created_date','approved',)
+    list_display = ('name','post' ,'subject' ,  'created_date','approved',)
     list_filter = ['approved']
     search_fields = ['name', 'subject', 'message']
 

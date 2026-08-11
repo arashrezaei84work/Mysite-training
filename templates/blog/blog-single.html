@@ -165,6 +165,14 @@
 									</div>
 									<button type="submit" class="primary-btn text-uppercase">Post Comment</button>	
 								</form>
+
+								{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<li{% if message.tags %} class="{{ message.tags|capfirst }}"{% endif %}>{{ message }}</li>
+										{% endfor %}
+									</ul>
+								{% endif %}
 							</div>
 							
 						</div>
