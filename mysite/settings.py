@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'taggit',
     'app_1.apps.App1Config',
     'blog.apps.BlogConfig',
+    'accounts.apps.AccountsConfig',
     'robots',
 ]
 
