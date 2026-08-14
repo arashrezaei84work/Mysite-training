@@ -1,5 +1,6 @@
 {% load static %}
 {% load blog_tags %}
+
 			<section class="recent-blog-area section-gap">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
@@ -16,22 +17,22 @@
 							<div class="single-recent-blog-post item">
 
 								<div class="thumb">
-									<img style="height: 230px;"  class="img-fluid" src="{{post.image.url}}" alt="">
+									<img style="height: 230px;width: 300px;"  class="img-fluid" src="{{post.image.url}}" alt="">
 								</div>
+								
 								<div class="details">
 									<div class="tags">
 										<ul>
+											{% for tag in post.tag.all %}
 											<li>
-												<a href="#">Travel</a>
+												<a href="{% url "blog:tag" tag_name=tag.name %}">{{tag.name}}</a>
 											</li>
-											<li>
-												<a href="#">Life Style</a>
-											</li>											
+											{% endfor %}
 										</ul>
 									</div>
 									<a href="{% url 'blog:detail' pid=post.id %}"><h4 class="title">{{post.title}}</h4></a>
 									<p>
-										{{post.content|truncatewords:6}}
+										{{post.content|truncatewords:6|safe}}
 									</p>
 									<h6 class="date">{{post.published_date|date:'d D M Y'}}</h6>
 								</div>

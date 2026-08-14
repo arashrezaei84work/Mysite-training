@@ -98,25 +98,25 @@ $(document).ready(function() {
             loop: true,
             margin: 30,
             dots: true,
-            autoplayHoverPause: true, 
-            smartSpeed:500,               
             autoplay: true,
+            autoplayHoverPause: true,
+            smartSpeed: 500,
+
             responsive: {
                 0: {
                     items: 1
                 },
-                480: {
-                    items: 1,
+                576: {
+                    items: 1
                 },
                 768: {
-                    items: 2,
+                    items: 2
                 },
-                961: {
-                    items: 3,
+                992: {
+                    items: 3
                 }
             }
-        }); 
-
+        });
     //------- Mobile Nav  js --------//  
 
     if ($('#nav-menu-container').length) {
