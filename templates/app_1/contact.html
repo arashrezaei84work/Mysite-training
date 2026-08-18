@@ -57,8 +57,13 @@
           action="{% url "app_1:contact" %}"
           method="post"
         >
+        {% csrf_token %}
+
           <div class="row">
-            {% csrf_token %}
+            {% if request.user.is_authenticated %}
+									<input type="hidden" name="name" value="{{request.user.username}}">
+									<input type="hidden" name="email" value="{{request.user.email}}">
+            {% else %}
             <div class="col-lg-6 form-group">
               <input
                 name="name"
@@ -80,7 +85,7 @@
                 required=""
                 type="email"
               />
-
+            {% endif %}
               <input
                 name="subject"
                 placeholder="Enter subject"
