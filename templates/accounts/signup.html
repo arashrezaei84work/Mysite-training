@@ -212,15 +212,14 @@
         </p>
 
 
-        {% if form.errors %}
+        {% if form.username.errors %}
             <div class="error-message">
-                Please correct the errors below.
+                {{ form.username.errors|striptags }}
             </div>
         {% endif %}
 
 
-        <form method="post">
-
+        <form method="post" action="{% url "accounts:signup" %}">
             {% csrf_token %}
 
 
@@ -241,7 +240,7 @@
             </div>
 
 
-            <div class="mb-3">
+            <!--<div class="mb-3">
 
                 <label class="form-label">
                     Email Address
@@ -255,7 +254,7 @@
                     required
                 >
 
-            </div>
+            </div>-->
 
 
             <div class="mb-3">
@@ -303,6 +302,13 @@
                 and
                 <a href="#">Privacy Policy</a>.
             </div>
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags|capfirst }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
 
 
         </form>
