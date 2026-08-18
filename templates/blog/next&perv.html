@@ -3,16 +3,17 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt=""></a>
+										{% if perv_post %}
+											<a href="{% url  'blog:detail' perv_post.id %}"><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt=""></a>
 										</div>
 										<div class="arrow">
-											<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
+											<a href="{% url  'blog:detail' perv_post.id %}"><span class="lnr text-white lnr-arrow-left"></span></a>
 										</div>
 										<div class="detials">
 											<p>Prev Post</p>
-											{% if perv_post %}
+											
 												<a href="{% url  'blog:detail' perv_post.id %}"><h4>{{perv_post.title}}</h4></a>
-										    {% endif %} 
+										{% endif %} 
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
@@ -20,13 +21,14 @@
 											<p>Next Post</p>
 											{% if next_post %}
 												<a href="{% url  'blog:detail' next_post.id %}"><h4>{{next_post.title}}</h4></a>
-										    {% endif %} 
+										     
 										</div>
 										<div class="arrow">
 											<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
 										</div>
 										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt=""></a>
+											<a href="{% url  'blog:detail' next_post.id %}"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt=""></a>
+											{% endif %}
 										</div>										
 									</div>									
 								</div>
