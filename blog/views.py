@@ -1,10 +1,13 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from blog.models import Post, Comment
 from django.template import loader
 from django.core.paginator import Paginator , PageNotAnInteger, EmptyPage
 from blog.forms import CommentForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -31,7 +34,6 @@ def blog_view(request, **kwargs):
     }
     return render(request, "blog/blog-home.html", context)
 
-
 def blog_detail(request, pid):
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -40,23 +42,24 @@ def blog_detail(request, pid):
             messages.add_message(request,messages.SUCCESS,'your comment submited.')
         else:
             messages.add_message(request,messages.ERROR,'your comment did not submited!')
-    posts = list(Post.objects.filter(status=1).order_by('id'))
-    post = get_object_or_404(Post, pk=pid)
+    post = get_object_or_404(Post, pk=pid, status=1)
     post.counted_views += 1
-    post.save()
+    post.save(update_fields=['counted_views'])
+    if  post.login_require and not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('accounts:login'))
+    
     comments = Comment.objects.filter(post=post.id,approved=1)
     form = CommentForm()
-    current_index = posts.index(post)
-    perv_post = posts[current_index - 1] if current_index > 0 else  None
-    next_post = posts[current_index + 1] if current_index < len(posts) - 1 else None
     context = {
         'post' :  post,
         'form' : form,
         'comments' : comments,
-        'perv_post' : perv_post,
-        'next_post' : next_post
     }
     return render (request, "blog/blog-single.html", context)
+
+    
+
+    
 
 def blog_category(request,cat):
     posts = Post.objects.filter(status=1)
@@ -65,6 +68,8 @@ def blog_category(request,cat):
         'posts' : posts,
     }
     return render(request, "blog/blog-home.html", context)
+
+
 
 def blog_search(request):
     posts = Post.objects.filter(status=1)

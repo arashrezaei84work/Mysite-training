@@ -60,39 +60,7 @@
 	
 								</div>
 							</div>
-							<div class="navigation-area">
-								<div class="row">
-									<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt=""></a>
-										</div>
-										<div class="arrow">
-											<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
-										</div>
-										<div class="detials">
-											<p>Prev Post</p>
-											{% if perv_post %}
-												<a href="{% url  'blog:detail' perv_post.id %}"><h4>{{perv_post.title}}</h4></a>
-										    {% endif %} 
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-										<div class="detials">
-											<p>Next Post</p>
-											{% if next_post %}
-												<a href="{% url  'blog:detail' next_post.id %}"><h4>{{next_post.title}}</h4></a>
-										    {% endif %} 
-										</div>
-										<div class="arrow">
-											<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
-										</div>
-										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt=""></a>
-										</div>										
-									</div>									
-								</div>
-							</div>
-
+							{% next_perv post %}
 							<!--
 							<div class="comments-area">
 
@@ -148,7 +116,10 @@
 								<form action="{% url "blog:detail" pid=post.id %}" method="post">
 									{% csrf_token %}
 									<input type="hidden" name="post" value="{{post.id}}">
-
+									{% if request.user.is_authenticated %}
+									<input type="hidden" name="name" value="{{request.user.username}}">
+									<input type="hidden" name="email" value="{{request.user.email}}">
+									{% else %}
 									<div class="form-group form-inline">
 									  <div class="form-group col-lg-6 col-md-12 name">
 									    <input type="text" class="form-control" name="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
@@ -157,6 +128,7 @@
 									    <input type="email" class="form-control" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
 									  </div>										
 									</div>
+									{% endif %}
 									<div class="form-group">
 										<input type="text" class="form-control" name="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
 									</div>
